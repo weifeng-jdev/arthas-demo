@@ -86,4 +86,19 @@ public class DemoController {
         });
         return "success";
     }
+
+    @GetMapping("/highCpu")
+    public String highCpu() {
+        new Thread(() -> {
+            while (true) {
+                log.info("highCpu exec..");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+        return "success";
+    }
 }
